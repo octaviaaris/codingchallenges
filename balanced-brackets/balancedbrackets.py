@@ -59,14 +59,21 @@ def has_balanced_brackets(phrase):
                 "]": "[",
                 ">": "<"}
 
+    openers = set(brackets.values())
+
     balanced = []
 
     for char in phrase:
-      if char in brackets.values():
+      if char in openers:
         balanced.append(char)
-      elif char in brackets.keys():
-        if balanced and balanced[-1] == brackets[char]:
+
+      elif char in brackets:
+        if balanced == []:
+          return False
+
+        if balanced[-1] == brackets[char]:
             balanced.pop()
+
         else:
           balanced.append(char)
 
